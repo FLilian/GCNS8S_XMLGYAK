@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- Egyszerű típusok kigyűjtése -->
+    <!-- User -->
+    <xs:element name="Name" type="xs:string" />
+    <xs:element name="UserTheme" type="xs:string" />
+    <xs:element name="Email" type="EmailType" />
+
+    <!-- Post -->
+    <xs:element name="Text" type="xs:string" />
+    <xs:element name="LikesNumber" type="xs:integer" />
+    <xs:element name="Date" type="DateType" />
+
+    <!-- Comment -->
+    <xs:element name="ComText" type="xs:string" />
+    <xs:element name="LikesNum" type="xs:integer" />
+    <xs:element name="ComDate" type="DateType" />
+
+    <!-- Image -->
+    <xs:element name="ImgName" type="xs:string" />
+    <xs:element name="ImgSize" type="xs:integer" />
+    <xs:element name="Resolution" type="ResolutionType" />
+
+    <!-- Group -->
+    <xs:element name="GroupName" type="xs:string" />
+    <xs:element name="Description" type="xs:string" />
+    <xs:element name="MembersNum" type="xs:integer" />
+
+    <!-- SignedUp -->
+    <xs:element name="JoinDate" type="DateType" />
+
+    <!-- Egyszerű saját típusok meghatározása -->
+    <xs:simpleType name="DateType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EmailType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="ResolutionType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d{3,5}x\d{3,5}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="StreetAddressType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9\s]+ \d+"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--felépítés-->
+    <xs:element name="facebook">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="User" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="Name"/>
+                            <xs:element ref="UserTheme" maxOccurs="unbounded"/>
+                            <xs:element ref="Email"/>
+                            <xs:element name="Address" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="ZipCode" type="xs:integer"/>
+                                        <xs:element name="City" type="xs:string"/>
+                                        <xs:element name="StreetAddress" type="StreetAddressType"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="UserID" type="xs:integer" use="required"/>
+                        <xs:attribute name="PostID" type="xs:integer"/>
+                        <xs:attribute name="CommentID" type="xs:integer"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Post" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="Text" />
+                            <xs:element ref="Date" />
+                            <xs:element ref="LikesNumber" />
+                        </xs:sequence>
+                        <xs:attribute name="PostID" type="xs:integer" use="required" />
+                        <xs:attribute name="ImageID" type="xs:integer" />
+                        <xs:attribute name="CommentID" type="xs:integer" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Image" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="ImgName" />
+                            <xs:element ref="ImgSize" />
+                            <xs:element ref="Resolution" />
+                        </xs:sequence>
+                        <xs:attribute name="ImageID" type="xs:integer" use="required" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Comment" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="ComText" />
+                            <xs:element ref="ComDate" />
+                            <xs:element ref="LikesNum" />
+                        </xs:sequence>
+                        <xs:attribute name="CommentID" type="xs:integer" use="required" />
+                        <xs:attribute name="PostID" type="xs:integer" />
+                        <xs:attribute name="UserID" type="xs:integer" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Group" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="GroupName" />
+                            <xs:element ref="Description" />
+                            <xs:element ref="MembersNum" />
+                        </xs:sequence>
+                        <xs:attribute name="GroupID" type="xs:integer" use="required" />
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SignedUp" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="JoinDate" />
+                        </xs:sequence>
+                        <xs:attribute name="GroupID" type="xs:integer" />
+                        <xs:attribute name="UserID" type="xs:integer" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    <!--Elsődleges kulcsok-->
+        <xs:unique name="UserIDKey">
+        <xs:selector xpath="User"/>
+        <xs:field xpath="@UserID"/>
+        </xs:unique>
+
+        <xs:unique name="PostIDKey">
+        <xs:selector xpath="Post"/>
+        <xs:field xpath="@PostID"/>
+        </xs:unique>
+
+        <xs:unique name="ImageIDKey">
+        <xs:selector xpath="Image"/>
+        <xs:field xpath="@ImageID"/>
+        </xs:unique>
+
+        <xs:unique name="CommentIDKey">
+        <xs:selector xpath="Comment"/>
+        <xs:field xpath="@CommentID"/>
+        </xs:unique>
+
+        <xs:unique name="GroupIDKey">
+        <xs:selector xpath="Group"/>
+        <xs:field xpath="@GroupID"/>
+        </xs:unique>
+
+        <xs:unique name="SignedUpKey">
+        <xs:selector xpath="SignedUp"/>
+        <xs:field xpath="@GroupID"/>
+        <xs:field xpath="@UserID"/>
+        </xs:unique>
+        <!--Idegen kulcsok-->
+        <xs:keyref name="User_Post" refer="UserIDKey">
+        <xs:selector xpath="Post"/>
+        <xs:field xpath="@PostID"/>
+        </xs:keyref>
+
+        <xs:keyref name="User_Comment" refer="UserIDKey">
+        <xs:selector xpath="Comment"/>
+        <xs:field xpath="@CommentID"/>
+        </xs:keyref>
+
+        <xs:keyref name="Post_Image" refer="PostIDKey">
+        <xs:selector xpath="Image"/>
+        <xs:field xpath="@ImageID"/>
+        </xs:keyref>
+
+        <xs:keyref name="Post_Comment" refer="PostIDKey">
+        <xs:selector xpath="Comment"/>
+        <xs:field xpath="@CommentID"/>
+        </xs:keyref>
+
+
+        <xs:keyref name="Comment_Post" refer="CommentIDKey">
+        <xs:selector xpath="Post"/>
+        <xs:field xpath="@PostID"/>
+        </xs:keyref>
+
+        <xs:keyref name="Comment_User" refer="CommentIDKey">
+        <xs:selector xpath="User"/>
+        <xs:field xpath="@UserID"/>
+        </xs:keyref>
+
+        <xs:keyref name="SignedUp_Group" refer="SignedUpKey">
+            <xs:selector xpath="Group"/>
+            <xs:field xpath="@GroupID"/>
+            <xs:field xpath="@UserID"/>
+        </xs:keyref>
+
+     <!--1:1 kapcsolat-->
+
+        <xs:keyref name="Post_Image_rel" refer="PostIDKey">
+            <xs:selector xpath="Image"/>
+            <xs:field xpath="@PostID"/>
+        </xs:keyref>
+
+    </xs:element>
+</xs:schema>
