@@ -1,0 +1,12 @@
+<!ELEMENT mozi (film*)>
+<!ELEMENT film (rendezo+,szinesz+,iro+)>
+    <!ATTLIST film id NMTOKEN #REQUIRED>
+    <!ATTLIST film mufaj (horror|comedy|drama) #REQUIRED>
+<!ELEMENT rendezo EMPTY>
+    <!ATTLIST rendezo id NMTOKEN #REQUIRED>
+    <!ATTLIST rendezo nev NMTOKEN #REQUIRED>
+<!ELEMENT szinesz EMPTY>
+    <!ATTLIST szinesz id NMTOKEN #REQUIRED>
+    <!ATTLIST szinesz nev NMTOKEN #REQUIRED>
+<!ELEMENT iro EMPTY>
+    <!ATTLIST iro id NMTOKEN #REQUIRED>

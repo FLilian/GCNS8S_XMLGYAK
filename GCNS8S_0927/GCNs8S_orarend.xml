@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GCNS8S_orarend>
+
+    <ora id="1" tipus="Eloadas">
+        <targy>Adatkezelés XML-ben</targy>
+        <idopont>
+            <nap>Szerda</nap>
+            <tol>10:00</tol>
+            <ig>12:00</ig>
+        </idopont>
+        <helyszin>XXXII.</helyszin>
+        <oktato>Dr. Bednarik László</oktato>
+        <szak>Programtervező</szak>
+    </ora>
+
+    <ora id="2" tipus="Eloadas">
+        <targy>vállalati Információs rendszerek</targy>
+        <idopont>
+            <nap>Szerda</nap>
+            <tol>14:00</tol>
+            <ig>16:00</ig>
+        </idopont>
+        <helyszin>Inf/101</helyszin>
+        <oktato>Sasvári tanár úr</oktato>
+        <szak>Programtervező</szak>
+    </ora>
+    <ora id="3" tipus="Gyakorlat">
+        <targy>vállalati Információs rendszerek</targy>
+        <idopont>
+            <nap>Szerda</nap>
+            <tol>18:00</tol>
+            <ig>20:00</ig>
+        </idopont>
+        <helyszin>Inf/101</helyszin>
+        <oktato>Sasvári tanár úr</oktato>
+        <szak>Programtervező</szak>
+    </ora>
+</GCNS8S_orarend>
