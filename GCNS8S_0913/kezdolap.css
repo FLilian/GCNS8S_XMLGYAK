@@ -1,0 +1,115 @@
+/*Közös weboldalak formázása*/
+.infoep_div img{
+    width: 15%;
+    height: 20%; 
+    margin-top: 5%; 
+}
+
+body{
+    background: lightseagreen;
+}
+
+.menu_div table{
+
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    color: white;
+    font-size: 150%;
+    font-weight: bold;
+    border: 1;
+    border-spacing: 60px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.footer_class{
+    color: white;
+    text-align: center;
+}
+
+small{
+    font-size: medium;
+}
+
+a:link{
+    color: wheat;
+}
+
+
+a:visited{
+    color: whitesmoke;
+}
+
+/*********************************************************************************************/
+
+/*kezdolap.html formázása*/
+.center_kezdolap_div{
+    margin: auto;
+    width: 40%;
+    padding: 10px;
+}
+
+.welcomeText_h4{
+    color: whitesmoke;
+}
+
+.text_p{
+    color: whitesmoke;
+}
+ 
+.sourceText_div{
+    color: whitesmoke;
+}
+
+/*********************************************************************************************/
+
+/*adatbazisrendszerek.html formázása*/
+.center_database_div{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.database_div{
+    color: whitesmoke;
+}
+
+/*********************************************************************************************/
+
+/*html5.html formázása*/
+.html5_div{
+    color: whitesmoke;
+    width: 50%;
+}
+
+.html5_logo_img{
+    float: right;
+    height: 350px;
+    width: 500px;
+}
+
+.center_html5_div{
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+/*********************************************************************************************/
+
+/*prezentacio.html formázása*/
+.center_prezentacio_div{
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+}
+
+.prezentacio_container_div{
+    color: whitesmoke;
+}
+
+.prezentacio_img{
+    float: right;
+    height: 350px;
+    width: 550px;
+}
